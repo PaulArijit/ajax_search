@@ -14,14 +14,6 @@ class page_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
 
-//        return $this->db->get('products', 10)->result();
-//
-//        $this->db->select("name, id, sku, price");
-//        $whereCondition = array('id' => $search);
-//        $this->db->where($whereCondition);
-//        $this->db->from('trn_employee');
-//        $query = $this->db->get();
-//        return $query->result();
     }
 
 }
