@@ -8,6 +8,11 @@
 
 class PagesController extends CI_Controller {
     
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('page_model');
+    }
+    
     public function view ($page = 'home'){
         
         if ( ! file_exists(APPPATH.'views/pages/'.$page.'.php'))
@@ -24,8 +29,16 @@ class PagesController extends CI_Controller {
     }
     
     public function search(){
-        $search_qur = $this->input->post('search', true);
-        print_r($search_qur);
+        $search_data = $this->input->post('search_data');
+        $reasult = $this->page_model->get_search_result($search_data);
+        
+        if(!empty($reasult)){
+            foreach ($reasult as $row):
+                echo "<li>".$row->name."&nbsp;".$row->sku."&nbsp;".$row->price."</li>";
+            endforeach;
+        }else{
+            echo"<li><em>Not Found</em></li>";
+        }
     }
     
     
