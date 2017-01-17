@@ -39,4 +39,18 @@
             });
         }
     }
+    
+    $('#search_field').keydown(function(e){
+        if(e.keyCode == 40){
+            //console.log("down key press");
+            $("#result-list li:first-child").addClass("selected");
+            var selectedItem = $(".selected");
+            $('#result-list li').removeClass("selected");
+            if(selectedItem.next().length == 0){
+                selectedItem.siblings().first().addClass("selected");
+            }else{
+                selectedItem.next().addClass("selected");
+            }
+        }
+    });
 </script>
