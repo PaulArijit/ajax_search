@@ -30,13 +30,28 @@ class PagesController extends CI_Controller {
     
     public function search(){
         $search_data = $this->input->post('search_data');
-        $reasult = $this->page_model->get_search_result($search_data);
         
-        if(!empty($reasult)){
-            foreach ($reasult as $row):
-                echo json_encode($row);
-            endforeach;
+        if (trim($search_data) == '') {
+            echo json_encode([]);
+            return;
         }
+        
+        $reasult = $this->page_model->get_search_result($search_data);
+        $name_arr = [];
+        foreach ($reasult as $key => $value) {
+            $name_arr[] = $value['name'];
+        }
+        echo json_encode($reasult);
+        
+//        echo json_encode($name_arr);
+//        pr($name_arr);
+//        echo '<pre>';
+//        print_r($reasult);
+//        if(!empty($reasult)){
+//            foreach ($reasult as $row):
+//                echo json_encode($row);
+//            endforeach;
+//        }
     }
     
     

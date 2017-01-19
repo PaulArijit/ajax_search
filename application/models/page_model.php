@@ -12,7 +12,7 @@ class page_model extends CI_Model {
         $this->db->from('products');
         
         $query = $this->db->get();
-        return $query->result();
+        return $query->result_array();
 
     }
 
