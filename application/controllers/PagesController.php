@@ -32,16 +32,11 @@ class PagesController extends CI_Controller {
         $search_data = $this->input->post('search_data');
         $reasult = $this->page_model->get_search_result($search_data);
         
-        //print result
-        echo"<ul>";
         if(!empty($reasult)){
             foreach ($reasult as $row):
-                echo "<li>".$row->name."&nbsp;".$row->sku."&nbsp;".$row->price."</li>";
+                echo json_encode($row);
             endforeach;
-        }else{
-            echo"<li><em>Not Found</em></li>";
         }
-        echo"</ul>";
     }
     
     
