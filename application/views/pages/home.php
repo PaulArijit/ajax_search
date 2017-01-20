@@ -16,8 +16,10 @@
 </center>
 <script type="text/javascript">
     $(function () {
-        $('#search_field').on('keyup', function (e) {
+        var searchTerm = '';
+        $('#search_field').on('input', function (e) {
             var value = $(this).val();
+            searchTerm = value;
             $.ajax({
                 type: "POST",
                 url: "<?php echo base_url(); ?>index.php/pagescontroller/search/",
@@ -42,18 +44,51 @@
                     $('#loading').html('');
                 }
             });
-
-            if (e.keyCode == 40) { // down
-                $('#result-list li').first().addClass("selected");
-                var selected = $(".selected");
-                $('#result-list li').removeClass("selected");
-                if (selected.next().length == 0) {
-                    selected.siblings.first().addClass("selected");
+        });
+        $('#search_field').on('keyup', function (e) {        
+            if (e.keyCode == 40) { // down                
+                if ($('.selected').length == 0) {
+                    $('#result-list li').first().addClass("selected");
                 } else {
-                    selected.next().addClass("selected");
+                    //console.log($('.selected').length); 
+                    var selectedItem = $('.selected');
+                    selectedItem.removeClass("selected");
+                    //console.log($('.selected').length);
+                    //console.log(selectedItem.next().length);
+                    if (selectedItem.next().length == 0) {
+                        $('#search_field').val(searchTerm);                        
+                        //selectedItem.siblings().first().addClass("selected");
+                    } else {
+                        //console.log('sdfas');
+                        selectedItem.next().addClass("selected");
+                    }
+                }
+
+
+
+
+            }
+
+            else if (e.keyCode == 38) {
+                if ($('.selected').length == 0) {
+                    $('#result-list li').last().addClass("selected");
+                }
+
+                var selectedItem = $('.selected');
+                selectedItem.removeClass("selected");
+
+                if (selectedItem.prev().length == 0) {
+                    $('#search_field').val(searchTerm);
+                    //selectedItem.siblings().last().addClass("selected");
+                } else {
+                    selectedItem.prev().addClass("selected");
                 }
             }
 
+            if ($('.selected').length == 1) {
+                var value = $('.selected').html();
+                $('#search_field').val(value);
+            }
         });
 
 
