@@ -15,34 +15,48 @@
     </div>
 </center>
 <script type="text/javascript">
-    $(function(){
-        $('#search_field').on('keyup', function(){
+    $(function () {
+        $('#search_field').on('keyup', function (e) {
             var value = $(this).val();
             $.ajax({
                 type: "POST",
                 url: "<?php echo base_url(); ?>index.php/pagescontroller/search/",
                 data: {search_data: value},
-                beforeSend: function() {
+                beforeSend: function () {
                     $('#loading').html('loading...');
                 },
-                success: function(data) {
+                success: function (data) {
                     var json = $.parseJSON(data);
-                    
-                    var items =  '';
+
+                    var items = '';
                     items += '<ul>';
                     var len = json.length;
                     for (var i = 0; i < len; i++) {
                         items += '<li>' + json[i].name + '</li>';
                     }
                     items += '</ul>';
-                    
+
                     $('#result-list').html(items);
                 },
-                 complete : function() {
-                     $('#loading').html('');
-                 }
-            })
-        })
+                complete: function () {
+                    $('#loading').html('');
+                }
+            });
+
+            if (e.keyCode == 40) { // down
+                $('#result-list li').first().addClass("selected");
+                var selected = $(".selected");
+                $('#result-list li').removeClass("selected");
+                if (selected.next().length == 0) {
+                    selected.siblings.first().addClass("selected");
+                } else {
+                    selected.next().addClass("selected");
+                }
+            }
+
+        });
+
+
     })
 </script>
 

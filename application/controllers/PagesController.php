@@ -42,16 +42,6 @@ class PagesController extends CI_Controller {
             $name_arr[] = $value['name'];
         }
         echo json_encode($reasult);
-        
-//        echo json_encode($name_arr);
-//        pr($name_arr);
-//        echo '<pre>';
-//        print_r($reasult);
-//        if(!empty($reasult)){
-//            foreach ($reasult as $row):
-//                echo json_encode($row);
-//            endforeach;
-//        }
     }
     
     

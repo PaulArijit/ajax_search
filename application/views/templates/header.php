@@ -26,7 +26,7 @@
             ul li:nth-child(even){
                 background: azure;
             }
-            li.selected{
+        .selected{
                 border: 1px solid green !important;
             }
         </style>
