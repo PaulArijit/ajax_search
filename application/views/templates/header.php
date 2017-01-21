@@ -28,6 +28,7 @@
             }
         .selected{
                 border: 1px solid green !important;
+                cursor: pointer;
             }
         </style>
     </head>
