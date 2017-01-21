@@ -91,9 +91,15 @@
             }
         });
         
-        $('#result-list').on('mouseover', function(){
-            console.log('fsdfds');
-           $('#result-list li', this).addClass("selected");
+        $('#result-list').on('mouseover', 'li', function(e){
+            var target = $(e.currentTarget);
+          
+                target.addClass("selected");
+                var selectVal = target.html();
+                $('#search_field').val(selectVal);
+          
+        }).on('mouseout', 'li', function(){
+            $('#result-list li').removeClass("selected");
         });
         
     })
