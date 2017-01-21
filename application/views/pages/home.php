@@ -90,8 +90,12 @@
                 $('#search_field').val(value);
             }
         });
-
-
+        
+        $('#result-list').on('mouseover', function(){
+            console.log('fsdfds');
+           $('#result-list li', this).addClass("selected");
+        });
+        
     })
 </script>
 
